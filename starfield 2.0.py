@@ -29,7 +29,7 @@ class Star:
         sy = py5.remap(self.y / self.z, 0, 1, 0, py5.height)
 
         r = py5.remap(self.z, 0, py5.width, 16, 0)
-        py5.
+        py5.ellipse(sx, sy, r, r)
         px = py5.remap(self.x / self.pz, 0, 1, 0, py5.width)
         py = py5.remap(self.y / self.pz, 0, 1, 0, py5.height)
 
@@ -57,3 +57,4 @@ def draw():
 if __name__ == "__main__":
 
     py5.run_sketch()
+

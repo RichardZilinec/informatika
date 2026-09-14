@@ -1,0 +1,73 @@
+import PIL
+from PIL import Image,ImageDraw
+sudoku = []
+size_sq = 100
+number = 9
+width = size_sq * number
+height = size_sq * number
+#
+#
+#
+def createImage():
+    image = Image.new('RGB', (width, height))
+    draw = ImageDraw.Draw(image)
+    for riadok in range(number):
+        for stlpec in range(number):
+            x1 = size_sq * stlpec
+            y1 = size_sq * riadok
+            x2 = x1 + size_sq
+            y2 = y1 + size_sq
+            draw.rectangle([x1,y1,x2,y2], outline='black', fill='white')
+    for i in range(1,3):
+        draw.line([i*300,0,i*300,900],fill='black', width=8)
+        draw.line([0,i*300,900,i*300],fill='black', width=8)
+    image.show()
+createImage()
+#
+#
+#
+def create_sudoku (sudoku):
+    fr = open('sudoku_text.txt', 'r')
+    for row in fr:
+        row = row.strip()
+        temp = []
+        for char in row:
+            temp.append(int(char))
+        sudoku.append(temp)
+#
+#
+#
+def check_it (x,y,num):
+    if num <= 9:    
+        for i in range (0, 9):
+            if sudoku[y][i] == num or sudoku[i][x] == num:
+                return False
+        s_x = (x//3)*3
+        s_y = (y//3)*3
+        for i in range (s_y, s_y+3):
+            for o in range(s_x, s_x+3):
+                if sudoku[i][o] == num:
+                    return False
+        return True
+    else:
+        return ('Zadaj cislo od 1 po 9')
+#
+#
+#
+def solver ():
+    global sudoku
+    for y in range(0,9):
+        for x in range(0,9):
+            if sudoku[y][x] == 0:
+                for i in range(1,10):
+                    if check_it (x,y,i):
+                        sudoku[y][x] = i
+                        solver()
+                        sudoku[y][x] = 0
+                return
+    print(sudoku)
+#
+#
+#
+create_sudoku(sudoku)
+solver()

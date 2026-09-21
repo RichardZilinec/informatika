@@ -1,0 +1,20 @@
+import tkinter as tk
+win = tk.Tk()
+canvas=tk.Canvas(height=1000, width=1000, bg="green")
+canvas.pack()
+def sq(a,x,y):
+    if a>1:
+        canvas.create_line(x,y,x+a,y,fill="yellow")
+        canvas.create_line(x,y,x,y-a,fill="yellow")
+        canvas.create_line(x,y-a,x+a,y-a,fill="yellow")
+        canvas.create_line(x+a,y-a,x+a,y,fill="yellow")
+        sq(a//3,x,y)
+        sq(a//3,x,y-(a//3))
+        sq(a//3,x+(a//3),y)
+        sq(a//3,x,y-(a//3)*2)
+        sq(a // 3, x + (a // 3)*2, y)
+        sq(a//3,x+a//3*2,y-(a//3))
+        sq(a // 3, x+a//3*2, y - (a // 3) * 2)
+        sq(a // 3, x+a//3, y - (a // 3) * 2)
+sq(1000,0,900)
+win.mainloop()

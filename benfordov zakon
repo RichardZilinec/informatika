@@ -1,0 +1,26 @@
+import random
+#
+#
+#
+pocet_opakovani = 10000
+vyskyt = {}
+percenta_zoz = []
+#
+#
+#
+for i in range(1,10):
+    vyskyt[i] = 0
+
+for i in range(0, pocet_opakovani + 1):
+    c_1 = random.choice(range(1,101))
+    c_2 = random.choice(range(1,101))
+    cislo = c_1 ** c_2
+    prve_cislo = int(str(cislo)[0])
+    #print(prve_cislo)
+    vyskyt[prve_cislo] += 1
+for i in range(1,10):
+    percenta_temp = vyskyt[i]
+    percenta = str(round(percenta_temp/pocet_opakovani*100,2))+'%'
+    percenta_zoz.append(percenta)
+print(vyskyt)
+print(percenta_zoz)

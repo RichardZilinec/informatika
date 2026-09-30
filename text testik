@@ -1,0 +1,9 @@
+fr = open('D:/škola/Downloads/vstup.txt', 'r', encoding='utf-8')
+text = fr.read()
+slovnik = {}
+#print(text)
+slova = text.split(' ')
+print(slova)
+for slovo in slova:
+    slovnik[slovo] = slovnik.get(slovo, 0) + 1
+print(slovnik)

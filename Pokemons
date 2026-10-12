@@ -11,3 +11,11 @@ for strenght in zdroj:
             attackfield[attacker]={}
         for defender in zdroj[strenght][attacker]:
             attackfield[attacker][defender] = helper[strenght]
+#
+#
+#
+def attack(n1:int, n2:int,army:str)->tuple:
+    zoz_pokemons = army.split(',')
+    my_army = zoz_pokemons[:n1:]
+    enemy_army = zoz_pokemons[n1::]
+    #print(my_army,enemy_army)

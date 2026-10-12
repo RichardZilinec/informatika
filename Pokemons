@@ -1,0 +1,13 @@
+import json
+zdroj = json.load(open('D:/škola/Downloads/effectivness.json','r'))
+attackfield = {}
+helper = {'super effective':2, 'normal effective':1, 'not very effective':0.5, 'no effect':0}
+#
+#
+#
+for strenght in zdroj:
+    for attacker in zdroj[strenght]:
+        if not attacker in attackfield.keys():
+            attackfield[attacker]={}
+        for defender in zdroj[strenght][attacker]:
+            attackfield[attacker][defender] = helper[strenght]

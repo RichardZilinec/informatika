@@ -1,0 +1,24 @@
+names = ['zero','one','two','three','four','five','six','seven','eight','nine']
+cisla = {}
+
+def spracuj_cisla():
+    global cisla
+    for cislo in range(len(names)):
+        fr = open('D:/škola/Downloads/cisla/'+ names[cislo] + '.txt', 'r')
+        cisla[cislo] = []
+        for line in fr:
+            line = line.strip('\n')
+            cisla[cislo].append(line)
+
+
+def vykresli_cislo (number):
+    #number rozbijeme na cifry -> trik cez string
+    for riadok in range(0,7):
+        for index_cisla in range(0,len(str(number))):
+            temp = int(str(number)[index_cisla])
+            print(cisla[temp][riadok], end='  ')
+        print('')
+
+
+spracuj_cisla()
+vykresli_cislo(67)

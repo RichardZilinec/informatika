@@ -1,5 +1,5 @@
 import json
-zdroj = json.load(open('D:/škola/Downloads/effectivness.json','r'))
+zdroj = json.load(open('effectivness.json','r'))
 attackfield = {}
 helper = {'super effective':2, 'normal effective':1, 'not very effective':0.5, 'no effect':0}
 #
@@ -15,7 +15,48 @@ for strenght in zdroj:
 #
 #
 def attack(n1:int, n2:int,army:str)->tuple:
+    my_score = 0
+    enemy_score = 0
     zoz_pokemons = army.split(',')
     my_army = zoz_pokemons[:n1:]
     enemy_army = zoz_pokemons[n1::]
-    #print(my_army,enemy_army)
+    for m in range(2):
+        for i in range(len(my_army)):
+            ma = my_army[i].split(' ')
+            for o in range(len(ma)):
+                temp2 = 1
+                temp = 0
+                temp3 = 1
+                for t in range(len(enemy_army)):
+                    ea = enemy_army[t].split(' ')
+                    for r in range(len(ea)):
+                        print(my_army[i].split(' ')[o] + '<->' + enemy_army[t].split(' ')[r] + '   ' + str(attackfield[my_army[i].split(' ')[o]][enemy_army[t].split(' ')[r]]))
+                        
+                        if len(ma) == 1 and len(ea) == 1:
+                            my_score += attackfield[ma[o]][ea[r]]
+                        elif len(ma) == 2 and len(ea) == 1:
+                            if temp < attackfield[ma[o]][ea[r]]:
+                                temp = attackfield[ma[o]][ea[r]]
+                        elif len(ma) == 1 and len(ea) == 2:
+                            temp2 = attackfield[ma[o]][ea[r]] * temp2
+                        #else:
+                            #if temp < attackfield[ma[o]][ea[r]]:
+                                #temp = attackfield[ma[o]][ea[r]]
+                            #temp3 = temp * temp3
+            if len(ma) == 1 and len(ea) == 2:
+                my_score += temp2              
+            if len(ma) == 2 and len(ea) == 2:
+                my_score += temp3
+            if len(ma) == 2 and len(ea) == 1:
+                my_score += temp
+            temp = 0
+            temp2 = 1
+            temp3 = 1
+        print(enemy_score,'   ',my_score)
+        my_army, enemy_army = enemy_army, my_army
+        my_score,enemy_score = enemy_score, my_score
+
+        
+attack(1,1,"Fire Ghost,Psychic Dark")
+#print(attackfield)
+#Fire Ghost,Psychic Dark,Water
